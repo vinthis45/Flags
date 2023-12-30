@@ -11,8 +11,11 @@ function App() {
     fetch("https://restcountries.com/v3.1/all")
       .then((response) => response.json())
       .then((data) => setCountries(data))
-      .catch((error) => console.error("Error fetching data: ", error))
-  }, [])
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+        throw error;
+      });
+  }, []);
 
   return (
     <div className="App">
@@ -33,5 +36,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
