@@ -20,14 +20,16 @@ function App() {
         setCountries(data);
       } catch (error) {
         console.error("Error fetching data: ", error);
-        console.log("Error fetching data: ", error); // Log the error using console.log as well
+        console.log("Error fetching data: ", error); 
+        throw error; 
       }
     };
   
     fetchData().catch((error) => {
-      console.error("Failed to fetch ", error);
+      console.error("Promise rejection: ", error);
     });
   }, []);
+  
 
   return (
     <div className="App">
