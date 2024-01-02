@@ -8,18 +8,20 @@ function App() {
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
-    fetch("https://restcountries.com/v3.1/all")
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://restcountries.com/v3.1/all");
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        return response.json();
-      })
-      .then((data) => setCountries(data))
-      .catch((error) => {
+        const data = await response.json();
+        setCountries(data);
+      } catch (error) {
         console.error("Error fetching data: ", error);
-        throw error; 
-      });
+        throw error;
+      }
+    };
+    fetchData();
   }, []);
 
   return (
