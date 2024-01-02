@@ -18,6 +18,7 @@ function App() {
         setCountries(data);
       } catch (error) {
         console.error("Error fetching data: ", error);
+        console.log("Error fetching data: ", error); // Log the error using console.log as well
         throw error;
       }
     };
