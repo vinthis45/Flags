@@ -7,29 +7,28 @@ import React, { useEffect, useState } from "react";
 function App() {
   const [countries, setCountries] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("https://restcountries.com/v3.1/all");
-  
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-  
-        const data = await response.json();
-        setCountries(data);
-      } catch (error) {
-        console.error("Error fetching data: ", error);
-        console.log("Error fetching data: ", error); 
-        throw error; 
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch("https://restcountries.com/v3.1/all");
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
-    };
-  
-    fetchData().catch((error) => {
-      console.error("Promise rejection: ", error);
-    });
+
+      const data = await response.json();
+      setCountries(data);
+    } catch (error) {
+      console.log("Error fetching data: ", error);
+
+    }
+  };
+
+  useEffect(() => {
+    fetchData()
+
   }, []);
-  
+
 
   return (
     <div className="App">
